@@ -11,8 +11,8 @@
   "keywords": [],
   "author": "",
   "license": "AGPLv3",
-  "packageManager": "pnpm@10.26.2",
+  "packageManager": "pnpm@10.28.0",
   "devDependencies": {
-    "turbo": "^2.7.2"
+    "turbo": "^2.8.3"
   }
 }
