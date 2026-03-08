@@ -1,0 +1,131 @@
+// app global css in SCSS form
+@import 'tailwindcss';
+@import '@fontsource/atkinson-hyperlegible/400.css'; // Regular
+@import '@fontsource/atkinson-hyperlegible/700.css'; // Bold
+@import '@catppuccin/tailwindcss/mocha.css';
+
+:root {
+  --h1: 1.67rem;
+  --h2: 1.33rem;
+  --h3: 1.05rem;
+  --h4: 0.84rem;
+  --h5: 0.84rem;
+
+  --background-color: var(--q-dark-page);
+
+  --q-primary: var(--catppuccin-color-sky-500);
+  --q-secondary: var(--catppuccin-color-lavender-500);
+  --q-accent: var(--catppuccin-color-overlay2);
+
+  --text-color: var(--color-stone-200);
+  --q-input-text-color: var(--color-stone-200);
+  --border-color: var(--color-stone-200);
+  color: var(--text-color);
+}
+
+body.highContrastMode {
+  --q-primary: var(--color-yellow-400);
+  --q-secondary: var(--color-purple-700);
+  --q-accent: #bac2de;
+
+  --border-color: var(--color-stone-100);
+
+  --q-dark: #1e1e2e;
+  --q-dark-page: black;
+  --background-color: black;
+
+  /* --q-negative: var(--color-rose-500); */
+  --q-negative: #ff5d66;
+
+  --text-color: white;
+  --q-input-text-color: white;
+}
+
+body {
+  background-color: var(--background-color);
+
+  &.body--dark {
+    color: var(--text-color) !important;
+  }
+}
+
+.bg-negative {
+  background-color: var(--q-negative);
+}
+
+.border-negative {
+  border-color: var(--q-negative);
+}
+
+h1,
+.h1 {
+  font-size: var(--h1); //30px
+  line-height: calc(1ex / 0.42);
+  margin: calc(1ex / 0.42) 0;
+  font-weight: 600;
+  scroll-margin-top: 4rem;
+  color: var(--text-color);
+}
+
+h2,
+.h2 {
+  font-size: var(--h2); //24px
+  line-height: calc(1ex / 0.42);
+  margin: calc(1ex / 0.42) 0;
+  font-weight: 600;
+  scroll-margin-top: 4rem;
+  color: var(--text-color);
+}
+
+h3,
+.h3 {
+  font-size: var(--h3); //19px
+  line-height: calc(1ex / 0.38);
+  margin: calc(1ex / 0.38) 0;
+  font-weight: 600;
+  scroll-margin-top: 4rem;
+  color: var(--text-color);
+}
+
+h4,
+.h4 {
+  font-size: var(--h4); //15px
+  line-height: calc(1ex / 0.37);
+  margin: calc(1ex / 0.37) 0;
+  font-weight: 600;
+  scroll-margin-top: 4rem;
+  color: var(--text-color);
+}
+
+h5 {
+  font-size: var(--h5); //15px
+  line-height: calc(1ex / 0.42);
+  margin: calc(1ex / 0.42) 0;
+  font-weight: 200;
+  scroll-margin-top: 4rem;
+  color: var(--text-color);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    $generic-hover-transition: none;
+
+    /* Disable CSS transitions and animations */
+    transition: none !important;
+    animation: none !important;
+
+    /* Optional: Disable smooth scrolling */
+    scroll-behavior: auto !important;
+  }
+
+  .q-focus-helper::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+.focusOutlineColor {
+  outline-color: var(--q-secondary);
+}
