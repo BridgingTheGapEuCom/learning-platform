@@ -37,8 +37,14 @@ export default defineRouter(function (/* { store, ssrContext } */) {
   const userStore = useUserStore();
 
   Router.beforeEach((to) => {
+    // 1. Unauthenticated users trying to access protected routes
     if (to.meta.requiresAuth && !userStore.isLoggedIn) {
       return { name: 'Login' };
+    }
+
+    // 2. Authenticated users trying to access the login page
+    if (to.name === 'Login' && userStore.isLoggedIn) {
+      return { name: 'Home' }; // Redirect them to the dashboard/home
     }
 
     return true;

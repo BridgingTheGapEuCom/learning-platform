@@ -5,6 +5,8 @@
 @import '@catppuccin/tailwindcss/mocha.css';
 
 :root {
+  --default-font-size: 18px;
+
   --h1: 1.67rem;
   --h2: 1.33rem;
   --h3: 1.05rem;
@@ -20,7 +22,10 @@
   --text-color: var(--color-stone-200);
   --q-input-text-color: var(--color-stone-200);
   --border-color: var(--color-stone-200);
+
   color: var(--text-color);
+  font-optical-sizing: auto;
+  font-size: var(--default-font-size);
 }
 
 body.highContrastMode {

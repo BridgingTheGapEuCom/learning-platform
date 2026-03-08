@@ -25,17 +25,25 @@ onBeforeMount(async () => {
 
   try {
     if (userStore.settings.language) {
-      let langModule =
-        languageModules[`../node_modules/quasar/lang/${userStore.settings.language}.js`];
+      let langToLoad = userStore.settings.language;
+      let langModule = languageModules[`../node_modules/quasar/lang/${langToLoad}.js`];
+
+      if (!langModule && langToLoad.includes('-')) {
+        langToLoad = langToLoad.split('-')[0];
+        langModule = languageModules[`../node_modules/quasar/lang/${langToLoad}.js`];
+      }
 
       if (langModule) {
         const newLanguage = (await langModule()) as { default: typeof $q.lang };
         $q.lang.set(newLanguage.default);
+        locale.value = newLanguage.default.isoName;
+        userStore.settings.language = newLanguage.default.isoName;
       } else {
-        langModule = languageModules[`../../node_modules/quasar/lang/en-US.js`];
+        langModule = languageModules[`../node_modules/quasar/lang/en-US.js`];
         if (langModule) {
           const newLanguage = (await langModule()) as { default: typeof $q.lang };
           $q.lang.set(newLanguage.default);
+          locale.value = newLanguage.default.isoName;
         }
 
         userStore.settings.language = 'en-US';

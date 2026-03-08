@@ -1,9 +1,9 @@
 <template>
-  <q-page class="h-full flex flex-col items-center">
+  <q-page class="h-full flex flex-col mx-3 items-center">
     <BTG_select
       v-model="settings.language"
       :options="langOptions"
-      class="self-end min-w-40 pr-4"
+      class="self-end min-w-40 absolute top-4 right-4"
       :label="t('app.login.language_label')"
       name="language"
       map-options
@@ -13,17 +13,20 @@
     </BTG_select>
     <div class="flex flex-col flex-grow">
       <div class="flex flex-col gap-4 flex-grow justify-center">
-        <div
-          ref="invalid-credentials"
-          v-if="invalidCredentials"
-          tabindex="0"
-          role="alert"
-          aria-live="assertive"
-          aria-atomic="true"
-          class="border p-3 rounded-md bg-negative text-black text-lg font-semibold border-red-700"
-        >
-          {{ t('app.login.invalid_credentials') }}
-        </div>
+        <q-slide-transition>
+          <div v-if="invalidCredentials">
+            <div
+              ref="invalid-credentials"
+              tabindex="0"
+              role="alert"
+              aria-live="assertive"
+              aria-atomic="true"
+              class="border p-3 rounded-md bg-negative text-black text-lg font-semibold border-red-700"
+            >
+              {{ t('app.login.invalid_credentials') }}
+            </div>
+          </div>
+        </q-slide-transition>
         <h1>{{ t('app.login.welcome_title') }}</h1>
         <q-form
           ref="loginForm"
@@ -76,9 +79,17 @@
           <BTG_btn
             :label="t('app.login.login_button')"
             high-contrast-color="--color-stone-950"
+            :class="{ 'BTG_btn--loading': loading }"
             class="q-mt-md"
             type="submit"
-          ></BTG_btn>
+            :disable="loading"
+            :loading="loading"
+          >
+            <template v-slot:loading>
+              <q-spinner class="on-left text-neutral-400"></q-spinner>
+              <div class="capitalize text-neutral-400">Verifying...</div>
+            </template>
+          </BTG_btn>
         </q-form>
 
         <q-separator class="q-my-md" />
@@ -87,9 +98,15 @@
           icon="fa-brands fa-google"
           border-color="--color-rose-300"
           high-contrast-border-color="--color-red-800"
+          :disable="loading"
           :label="t('app.login.login_with_google')"
-          href="http://localhost:3000/auth/google"
+          :loading="loading"
+          :href="loading ? null : 'http://localhost:3000/auth/google'"
         >
+          <template v-slot:loading>
+            <q-spinner class="on-left text-neutral-400"></q-spinner>
+            <div class="capitalize text-neutral-400">Verifying...</div>
+          </template>
         </BTG_btn>
       </div>
 
@@ -133,6 +150,8 @@ const email: Ref<string | null> = ref(null);
 const password: Ref<string | null> = ref(null);
 const isPwd: Ref<boolean> = ref(true);
 
+const loading = ref(false);
+
 const loginForm: Ref<QForm | null> = useTemplateRef('loginForm');
 const invalidCredentialsRef = useTemplateRef('invalid-credentials');
 
@@ -144,6 +163,25 @@ const langOptions = appLanguages.map((lang) => ({
   value: lang.isoName,
 }));
 
+/**
+ * Handles language change events.
+ *
+ * @param {string | number | null | undefined} value - The new language value to set.
+ *   This can be a string representing the language code, a number (though not typically used),
+ *   or null/undefined if no language is selected.
+ *
+ * @returns {void} This function doesn't return anything.
+ *
+ * @description
+ * When a language is selected, this function:
+ * 1. Sets the application's locale to the selected value (if provided)
+ * 2. Resets the validation state of the login form
+ *
+ * @edge-cases
+ * - If the value is null or undefined, the function does nothing
+ * - The function assumes the value is a string when setting the locale
+ * - The loginForm ref must be properly initialized before calling this function
+ */
 const onLanguageChange = (value: string | number | null | undefined) => {
   if (value) {
     locale.value = value as string;
@@ -153,6 +191,7 @@ const onLanguageChange = (value: string | number | null | undefined) => {
 
 const login = async () => {
   if (await loginForm.value!.validate()) {
+    loading.value = true;
     try {
       const loginResponse = await api.post('/auth/login', {
         email: email.value!,
@@ -183,6 +222,8 @@ const login = async () => {
       });
       console.error('Login failed:', error);
     }
+
+    loading.value = false;
   }
 };
 </script>

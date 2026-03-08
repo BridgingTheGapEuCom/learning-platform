@@ -72,6 +72,31 @@ const borderColorComputed = computed(() => {
   return `var(--q-${props.borderColor})`;
 });
 
+/**
+ * Computes the text color for the button component.
+ *
+ * @returns {string} A CSS variable string (e.g., 'var(--q-dark-page)' or 'var(--my-custom-color)')
+ *                   that represents the computed text color.
+ *
+ * @param {object} props - Implicitly uses `props.highContrastColor` to determine the text color
+ *                         when high contrast is enabled.
+ * @param {object} userStore.settings - Implicitly uses `userStore.settings.highContrast` to determine
+ *                                      whether to apply high contrast styling.
+ *
+ * @remarks
+ * This computed property dynamically determines the text color based on the `userStore`'s
+ * high contrast setting and the component's `highContrastColor` prop.
+ *
+ * @edgecases
+ * - If `userStore.settings.highContrast` is `true`:
+ *   - The value of `props.highContrastColor` is used.
+ *   - If `props.highContrastColor` starts with `'--'`, it is treated as a direct CSS variable name
+ *     (e.g., `highContrastColor: '--my-color'` results in `var(--my-color)`).
+ *   - Otherwise, it is prefixed with `'--q-'` to reference a Quasar color palette variable
+ *     (e.g., `highContrastColor: 'primary'` results in `var(--q-primary)`).
+ * - If `userStore.settings.highContrast` is `false`:
+ *   - The text color is always set to `var(--q-dark-page)`.
+ */
 const textColor = computed(() => {
   if (userStore.settings.highContrast) {
     if (props.highContrastColor.startsWith('--')) {
@@ -85,6 +110,7 @@ const textColor = computed(() => {
   }
   return `var(--q-dark-page)`;
 });
+
 defineOptions({ inheritAttrs: false });
 </script>
 
@@ -106,6 +132,11 @@ defineOptions({ inheritAttrs: false });
     &.disabled {
       border-color: var(--border-color);
     }
+
+    &.BTG_btn--loading {
+      border-width: 0 !important;
+      background-color: var(--q-dark) !important;
+    }
   }
 
   /**
@@ -116,8 +147,8 @@ defineOptions({ inheritAttrs: false });
  * @edgecase
  * - These styles are explicitly disabled for buttons with the `.disabled` class.
  */
-  &.q-btn:not(.disabled):hover,
-  &.q-btn:not(.disabled):focus {
+  &.q-btn:not(.disabled):not(.BTG_btn--loading):hover,
+  &.q-btn:not(.disabled):not(.BTG_btn--loading):focus {
     color: v-bind(textColor) !important;
     transition: color 0.3s linear;
   }

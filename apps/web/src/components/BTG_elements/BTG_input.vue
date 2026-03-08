@@ -158,6 +158,9 @@ defineOptions({ inheritAttrs: false });
     box-shadow: 0 0 0 1000px var(--q-dark-page) inset !important;
     -webkit-text-fill-color: var(--text-color) !important;
     caret-color: var(--text-color);
+    font-size: 1rem !important;
+    font-family: $typography-font-family !important;
+    zoom: 1;
   }
 
   & .q-field__control:before {

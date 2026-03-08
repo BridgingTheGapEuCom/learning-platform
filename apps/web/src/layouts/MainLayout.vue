@@ -27,8 +27,8 @@
       <!-- drawer content -->
     </q-drawer>
 
-    <q-page-container>
-      <router-view />
+    <q-page-container class="flex justify-center items-center">
+      <router-view class="max-w-[80rem]" />
     </q-page-container>
 
     <q-footer class="bg-grey-8 text-white">
