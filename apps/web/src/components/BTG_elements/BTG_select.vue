@@ -30,6 +30,7 @@ interface Props extends Omit<QSelectProps, 'modelValue' | 'onUpdate:modelValue'>
   modelValue?: any;
   /** The color used for borders when the user has high contrast mode enabled. */
   highContrastBorderColor?: string;
+  labelBackground?: 'var(--q-dark-page)';
 }
 /**
  * Component props with default values.
@@ -40,6 +41,7 @@ const props = withDefaults(defineProps<Props>(), {
   dark: true,
   color: 'primary',
   highContrastBorderColor: 'primary',
+  labelBackground: 'var(--q-dark-page)',
 });
 
 /**
@@ -131,12 +133,11 @@ defineOptions({ inheritAttrs: false });
 <style lang="scss">
 .BTG_select {
   cursor: pointer;
-  margin-top: 1rem;
 
   & .q-field__label {
     transform: translateY(-130%) scale(1) !important;
     font-size: 1.1rem;
-    background: var(--q-dark-page);
+    background: v-bind(labelBackground);
     margin: 0 0.75rem;
     padding: 0 0.5rem;
     max-width: 133%;
@@ -220,11 +221,6 @@ defineOptions({ inheritAttrs: false });
     & .q-field__bottom {
       padding: 4px 12px 0;
     }
-  }
-
-  & .q-field__input {
-    padding-left: 1rem;
-    margin-bottom: 1rem;
   }
 }
 

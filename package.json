@@ -13,6 +13,6 @@
   "license": "AGPLv3",
   "packageManager": "pnpm@10.28.0",
   "devDependencies": {
-    "turbo": "^2.8.10"
+    "turbo": "^2.8.21"
   }
 }

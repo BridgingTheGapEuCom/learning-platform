@@ -1,5 +1,5 @@
 <template>
-  <q-btn class="BTG_btn" v-bind="{ ...props, ...$attrs }">
+  <q-btn ref="buttonRef" class="BTG_btn" v-bind="{ ...props, ...$attrs }">
     <template v-for="(_, name) in $slots" #[name]="slotData">
       <slot :name="name" v-bind="slotData || {}" />
     </template>
@@ -9,7 +9,8 @@
 <script setup lang="ts">
 import type { QBtnProps } from 'quasar';
 import { useUserStore } from 'src/stores/user';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
+import { QBtn } from 'quasar';
 import { isReducedMotions } from '../helpers';
 
 interface Props extends Omit<QBtnProps, 'onClick'> {
@@ -112,6 +113,12 @@ const textColor = computed(() => {
 });
 
 defineOptions({ inheritAttrs: false });
+
+const buttonRef = ref<InstanceType<typeof QBtn>>();
+
+defineExpose({
+  focus: () => buttonRef.value?.$el?.focus(),
+});
 </script>
 
 <style lang="scss">

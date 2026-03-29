@@ -1,57 +1,61 @@
 <template>
   <q-layout view="lHr lpr lFr">
-    <q-header class="bg-dark text-white" height-hint="98">
-      <q-toolbar>
+    <q-header class="bg-dark text-white" height-hint="98" v-if="!$q.screen.gt.md">
+      <q-toolbar class="flex">
         <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
 
-        <q-toolbar-title>
-          <q-avatar>
-            <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg" />
-          </q-avatar>
-          Bridging The Gap Learning Platform
-        </q-toolbar-title>
-
-        <q-btn dense flat round icon="menu" @click="toggleRightDrawer" />
+        <div class="text-sm text-center grow-1">
+          <div><b>Bridging The Gap</b></div>
+          Learning Platform
+        </div>
       </q-toolbar>
-
-      <q-tabs align="left">
-        <q-route-tab to="/" label="Home" />
-      </q-tabs>
     </q-header>
 
-    <q-drawer show-if-above v-model="leftDrawerOpen" side="left" bordered>
-      <!-- drawer content -->
+    <q-drawer
+      show-if-above
+      v-model="leftDrawerOpen"
+      side="left"
+      bordered
+      :breakpoint="$q.screen.sizes.md"
+      :width="$q.screen.lt.sm ? $q.screen.width : 300"
+      persistent
+    >
+      <BTG_btn
+        label="Skip to main content"
+        href="#main-content"
+        class="absolute top-[-100vh] left-[-100vw] z-10 focus:top-6 focus:left-4"
+        @click="skipToContent"
+      ></BTG_btn>
+      <LeftDrawer @closeDrawer="leftDrawerOpen = false" />
     </q-drawer>
 
-    <q-drawer show-if-above v-model="rightDrawerOpen" side="right" bordered>
-      <!-- drawer content -->
-    </q-drawer>
-
-    <q-page-container class="flex justify-center items-center">
-      <router-view class="max-w-[80rem]" />
+    <q-page-container
+      id="main-content"
+      tabindex="-1"
+      class="flex justify-center items-center outline-none"
+    >
+      <router-view class="max-w-[80rem] p-6 flex flex-col" />
     </q-page-container>
-
-    <q-footer class="bg-grey-8 text-white">
-      <q-toolbar>
-        <q-toolbar-title>
-          <div>Bottom Toolbar Title</div>
-        </q-toolbar-title>
-      </q-toolbar>
-    </q-footer>
   </q-layout>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue';
+import LeftDrawer from '../components/LeftDrawer.vue';
+import BTG_btn from '../components/BTG_elements/BTG_btn.vue';
 
 const leftDrawerOpen = ref(false);
-const rightDrawerOpen = ref(false);
 
 const toggleLeftDrawer = () => {
   leftDrawerOpen.value = !leftDrawerOpen.value;
 };
 
-const toggleRightDrawer = () => {
-  rightDrawerOpen.value = !rightDrawerOpen.value;
+const skipToContent = (e?: Event) => {
+  e?.preventDefault();
+  const mainContent = document.getElementById('main-content');
+  if (mainContent) {
+    mainContent.focus();
+    mainContent.scrollIntoView();
+  }
 };
 </script>

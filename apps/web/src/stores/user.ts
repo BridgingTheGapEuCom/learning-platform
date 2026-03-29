@@ -11,8 +11,8 @@ const getDefaultLanguage = () => {
   }
 
   const shortLang = navLang.split('-')[0];
-  if (availableLanguages.includes(shortLang)) {
-    return shortLang;
+  if (availableLanguages.includes(shortLang ? shortLang : 'en-US')) {
+    return shortLang ? shortLang : 'en-US';
   }
 
   return 'en-US';

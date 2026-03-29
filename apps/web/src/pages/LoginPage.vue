@@ -101,7 +101,7 @@
           :disable="loading"
           :label="t('app.login.login_with_google')"
           :loading="loading"
-          :href="loading ? null : 'http://localhost:3000/auth/google'"
+          :href="loading ? undefined : 'http://localhost:3000/auth/google'"
         >
           <template v-slot:loading>
             <q-spinner class="on-left text-neutral-400"></q-spinner>

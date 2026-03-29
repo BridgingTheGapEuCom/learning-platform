@@ -1,5 +1,7 @@
 export default {
   app: {
+    platformName: 'Bridging The Gap',
+    learningPlatform: 'Learning Platform',
     login: {
       welcome_title: 'Welcome to Bridging The Gap Learning Platform',
       language_label: 'Language',
@@ -20,6 +22,21 @@ export default {
     validation: {
       email_invalid: 'Please enter a valid email address',
       password_required: 'Please enter your password',
+    },
+    leftDrawer: {
+      MyLearning: 'My Learning',
+      Dashboard: 'Dashboard',
+      Courses: 'Courses',
+      Assignments: 'Assignments',
+      Events: 'Events',
+      Community: 'Community',
+      LearningPaths: 'Learning Paths',
+      Discovery: 'Discovery',
+      Me: 'Me',
+      Profile: 'Profile',
+      Certificates: 'Certificates',
+      Settings: 'Settings',
+      Logout: 'Logout',
     },
   },
 };

@@ -28,6 +28,8 @@ interface Props extends Omit<QInputProps, 'modelValue'> {
   modelValue?: string | number | null | undefined;
   /** The color used for borders when the user has high contrast mode enabled. */
   highContrastBorderColor?: string;
+  /** The background color for the label. */
+  labelBackground?: string;
 }
 
 /**
@@ -39,6 +41,7 @@ const props = withDefaults(defineProps<Props>(), {
   dark: true,
   color: 'primary',
   highContrastBorderColor: 'primary',
+  labelBackground: 'var(--q-dark-page)',
 });
 
 /**
@@ -130,12 +133,11 @@ defineOptions({ inheritAttrs: false });
 <style lang="scss">
 .BTG_input {
   cursor: text;
-  margin-top: 1rem;
 
   & .q-field__label {
     transform: translateY(-130%) scale(1) !important;
     font-size: 1.1rem;
-    background: var(--q-dark-page);
+    background: v-bind(labelBackground);
     margin: 0 0.75rem;
     padding: 0 0.5rem;
     max-width: 133%;
