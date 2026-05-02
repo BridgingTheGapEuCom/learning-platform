@@ -3,7 +3,7 @@ export interface User {
   firstName: string;
   lastName: string;
   organizations: any[];
-  global_role: string;
+  globalRole: string;
   mustChangePassword: boolean;
   createdAt: string;
   updatedAt: string;

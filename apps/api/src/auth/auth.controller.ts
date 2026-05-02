@@ -17,9 +17,10 @@ import { User } from '../users/schemas/user.schema';
 import { AuthService } from './auth.service';
 import { Public } from './decorators/public.decorator';
 import { SkipPasswordChange } from './decorators/skip-password-change.decorator';
-import { ChangePasswordDto, RegisterDto, SocialUser } from '@btg/shared-types';
+import { ChangePasswordDto, RegisterDto } from './dto/auth.dto';
+import { SocialUser } from '@btg/shared-types/dist/interfaces/social-user.interface';
 import { type RequestWithUser } from './interfaces/request-with-user.interface';
-import { LoginDto } from '@btg/shared-types';
+import { LoginDto } from './dto/auth.dto';
 import { Throttle } from '@nestjs/throttler';
 import { ApiBody, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { ConfigService } from '@nestjs/config';
@@ -177,12 +178,13 @@ export class AuthController {
    */
   @Post('logout')
   @SkipPasswordChange()
+  @Public()
   @HttpCode(HttpStatus.OK)
   async logout(
     @Req() req: RequestWithUser,
     @Res({ passthrough: true }) res: Response,
   ): Promise<{ message: string }> {
-    await this.authService.logout(req.user.id);
+    await this.authService.logout(req.user?.id);
 
     res.clearCookie('refresh_token', {
       path: '/',

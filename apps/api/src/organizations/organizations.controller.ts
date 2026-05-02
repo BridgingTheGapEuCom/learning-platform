@@ -2,7 +2,7 @@ import { Body, Controller, Post, Req } from '@nestjs/common';
 import { Roles } from '../auth/decorators/roles.decorator';
 import { type RequestWithUser } from '../auth/interfaces/request-with-user.interface';
 import { Role } from '@btg/shared-types';
-import { CreateOrganizationDto } from '@btg/shared-types';
+import { CreateOrganizationDto } from './dto/organization.dto';
 import { OrganizationsService } from './organizations.service';
 
 @Controller('organizations')

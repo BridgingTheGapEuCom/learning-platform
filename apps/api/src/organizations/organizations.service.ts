@@ -1,7 +1,7 @@
 import { Injectable, ConflictException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
-import { CreateOrganizationDto } from '@btg/shared-types';
+import { CreateOrganizationDto } from './dto/organization.dto';
 import { Organization } from './schemas/organization.schema';
 import { UsersService } from '../users/users.service';
 import { OrganizationRole } from '@btg/shared-types';

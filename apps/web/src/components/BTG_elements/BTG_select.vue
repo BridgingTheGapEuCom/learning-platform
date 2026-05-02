@@ -30,7 +30,7 @@ interface Props extends Omit<QSelectProps, 'modelValue' | 'onUpdate:modelValue'>
   modelValue?: any;
   /** The color used for borders when the user has high contrast mode enabled. */
   highContrastBorderColor?: string;
-  labelBackground?: 'var(--q-dark-page)';
+  labelBackground?: string;
 }
 /**
  * Component props with default values.
@@ -164,8 +164,8 @@ defineOptions({ inheritAttrs: false });
   }
 
   & .q-field__native:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0 1000px var(--q-dark-page) inset !important;
-    box-shadow: 0 0 0 1000px var(--q-dark-page) inset !important;
+    -webkit-box-shadow: 0 0 0 1000rem var(--q-dark-page) inset !important;
+    box-shadow: 0 0 0 1000rem var(--q-dark-page) inset !important;
     -webkit-text-fill-color: var(--text-color) !important;
     caret-color: var(--text-color);
   }
@@ -173,19 +173,19 @@ defineOptions({ inheritAttrs: false });
   & .q-field__control:before {
     border-style: solid;
     border-color: var(--border-color);
-    border-width: 2px;
-    border-radius: 8px;
+    border-width: 0.15rem;
+    border-radius: 0.6rem;
     transition: border-color 0.3s ease-in-out;
     z-index: 5;
   }
 
   &:not(.q-field--error) .q-field__control:focus-within:before {
-    border: 2px solid v-bind(borderColor);
+    border: 0.15rem solid v-bind(borderColor);
   }
 
   &:not(.q-field--error) .q-field__control:hover:before {
     border-color: var(--q-primary);
-    border-width: 2px;
+    border-width: 0.15rem;
   }
 
   & .q-field__append .q-icon {
@@ -206,7 +206,7 @@ defineOptions({ inheritAttrs: false });
     & .q-field__control:hover:before,
     & .q-field__control:focus-within:before {
       border-color: var(--q-negative);
-      border-width: 2px;
+      border-width: 0.15rem;
     }
 
     & .q-field__append .q-icon {
@@ -219,7 +219,7 @@ defineOptions({ inheritAttrs: false });
     }
 
     & .q-field__bottom {
-      padding: 4px 12px 0;
+      padding: 0.3rem 1rem 0;
     }
   }
 }

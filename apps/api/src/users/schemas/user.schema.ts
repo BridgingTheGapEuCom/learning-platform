@@ -60,7 +60,7 @@ export class GoogleAuth {
  * @property {string} [password] - The hashed password for the user. Hidden from query results by default.
  * @property {string} [ssoId] - Optional single sign-on identifier for the user.
  * @property {Types.ObjectId[]} organizations - List of organizations the user is associated with.
- * @property {Role} global_role - The user's global role in the system. Defaults to `Role.User`.
+ * @property {Role} globalRole - The user's global role in the system. Defaults to `Role.User`.
  * @property {string|null} [hashedRefreshToken] - Optional hashed refresh token for session management. Hidden by default.
  * @property {boolean} mustChangePassword - Flag indicating whether the user must update their password. Defaults to `false`.
  * @property {GoogleAuth} [google] - Google authentication details if the user is authenticated via Google.
@@ -92,6 +92,9 @@ export class User extends Document {
   @Prop({ required: true })
   lastName: string;
 
+  @Prop({ required: false })
+  displayName?: string;
+
   @Prop({ required: false, select: false })
   password?: string;
 
@@ -102,13 +105,16 @@ export class User extends Document {
   organizations: Types.ObjectId[];
 
   @Prop({ type: String, enum: Role, default: Role.User })
-  global_role: Role;
+  globalRole: Role;
 
   @Prop({ select: false, type: String })
   hashedRefreshToken?: string | null;
 
   @Prop({ default: false })
   mustChangePassword: boolean;
+
+  @Prop({ type: String, default: 'Active' })
+  status: boolean;
 
   @Prop({ type: GoogleAuth })
   google?: GoogleAuth;

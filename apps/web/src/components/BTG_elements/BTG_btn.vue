@@ -132,7 +132,7 @@ defineExpose({
  * - When the button has the `.disabled` class, the border color is overridden to a specific stone palette variable.
  */
   &.q-btn {
-    border-width: 2px !important;
+    border-width: 0.15rem !important;
     border-color: v-bind(borderColorComputed);
     border-style: solid;
 

@@ -24,6 +24,6 @@ export class RolesGuard implements CanActivate {
       return false;
     }
 
-    return requiredRoles.some((role) => user.global_role === role);
+    return requiredRoles.some((role) => user.globalRole === role);
   }
 }

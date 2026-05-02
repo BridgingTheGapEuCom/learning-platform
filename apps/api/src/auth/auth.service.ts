@@ -12,7 +12,8 @@ import * as argon2 from 'argon2';
 import { User } from '../users/schemas/user.schema';
 import { ConfigService } from '@nestjs/config';
 import { Types } from 'mongoose';
-import { CreateSocialUserDto, RegisterDto } from '@btg/shared-types';
+import { CreateSocialUserDto } from './dto/create-social-user.dto';
+import { RegisterDto } from './dto/auth.dto';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import { EmailService } from '../email/email.service';
 import * as crypto from 'node:crypto';
@@ -89,7 +90,7 @@ export class AuthService implements OnModuleInit {
       user.email,
       user.firstName,
       user.lastName,
-      user.global_role,
+      user.globalRole ? user.globalRole : '',
     );
     await this.updateRefreshTokenHash(user.id, tokens.refresh_token);
     return tokens;
@@ -102,7 +103,9 @@ export class AuthService implements OnModuleInit {
    * @param userId The ID of the user to log out, can be a `Types.ObjectId` or a string.
    * @returns A promise that resolves when the user's refresh token hash has been cleared.
    */
-  async logout(userId: Types.ObjectId | string): Promise<void> {
+  async logout(userId?: Types.ObjectId | string): Promise<void> {
+    if (!userId) return;
+
     if (typeof userId === 'string') {
       userId = new Types.ObjectId(userId);
     }
@@ -210,7 +213,7 @@ export class AuthService implements OnModuleInit {
       user.email,
       user.firstName,
       user.lastName,
-      user.global_role,
+      user.globalRole,
     );
     await this.updateRefreshTokenHash(user.id, tokens.refresh_token);
 
@@ -308,7 +311,7 @@ export class AuthService implements OnModuleInit {
         user.email,
         user.firstName,
         user.lastName,
-        user.global_role,
+        user.globalRole,
       );
 
       await this.updateRefreshTokenHash(user._id, tokens.refresh_token);

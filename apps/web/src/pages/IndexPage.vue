@@ -5,8 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import Dashboard from '../components/Dashboard.vue';
+import Dashboard from '../components/DashboardElement.vue';
 </script>
 
 <style scoped>

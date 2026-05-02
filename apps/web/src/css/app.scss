@@ -4,8 +4,12 @@
 @import '@fontsource/atkinson-hyperlegible/700.css'; // Bold
 @import '@catppuccin/tailwindcss/mocha.css';
 
+html {
+  font-size: var(--default-font-size);
+}
+
 :root {
-  --default-font-size: 18px;
+  --default-font-size: 15px;
 
   --h1: 1.67rem;
   --h2: 1.33rem;
@@ -41,8 +45,7 @@ body.highContrastMode {
 
   /* --q-negative: var(--color-rose-500); */
   --q-negative: #ff5d66;
-
-  --text-color: white;
+  --q-positive: #a6e3a1;
   --q-input-text-color: white;
 }
 
@@ -54,12 +57,24 @@ body {
   }
 }
 
+.bg-positive {
+  background-color: var(--q-positive);
+}
+
+.border-positive {
+  border-color: var(--q-positive);
+}
+
 .bg-negative {
   background-color: var(--q-negative);
 }
 
 .border-negative {
   border-color: var(--q-negative);
+}
+
+.text-color {
+  color: var(--text-color);
 }
 
 h1,
@@ -111,24 +126,30 @@ h5 {
   color: var(--text-color);
 }
 
-@media (prefers-reduced-motion: reduce) {
+@mixin global-reduce {
   *,
   *::before,
   *::after {
-    $generic-hover-transition: none;
-
-    /* Disable CSS transitions and animations */
-    transition: none !important;
-    animation: none !important;
-
-    /* Optional: Disable smooth scrolling */
+    /* Use a tiny duration to satisfy JS 'transitionend' listeners */
+    transition-duration: 1ms !important;
+    animation-duration: 1ms !important;
+    animation-delay: 0 !important;
+    animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
   }
 
-  .q-focus-helper::after {
-    transition: none !important;
-    animation: none !important;
+  /* Specific Quasar ripple/focus override */
+  .q-ripple {
+    display: none !important;
   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @include global-reduce;
+}
+
+.reduce-motion {
+  @include global-reduce;
 }
 
 .focusOutlineColor {

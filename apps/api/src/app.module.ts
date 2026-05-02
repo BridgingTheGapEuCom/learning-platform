@@ -11,6 +11,7 @@ import { PasswordChangeGuard } from './auth/guards/password-change.guard';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { EmailModule } from './email/email.module';
+import { CourseModule } from './course/course.module';
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import { EmailModule } from './email/email.module';
     AuthModule,
     OrganizationsModule,
     EmailModule,
+    CourseModule,
   ],
   controllers: [AppController],
   providers: [

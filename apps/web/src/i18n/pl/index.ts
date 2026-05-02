@@ -1,5 +1,13 @@
 export default {
   app: {
+    brand: 'Bridging The Gap',
+    platformName: 'Bridging The Gap',
+    learningPlatform: 'Platforma edukacyjna',
+    skipToMainContent: 'Przejdź do głównej treści',
+    errorNotFound: {
+      nothingHere: 'Ups. Nic tu nie ma...',
+      goHome: 'Strona główna',
+    },
     login: {
       welcome_title: 'Witamy na platformie edukacyjnej Bridging The Gap',
       language_label: 'Język',
@@ -10,6 +18,7 @@ export default {
       high_contrast_mode: 'Tryb wysokiego kontrastu',
       toggle_password_visibility: 'Przełącz widoczność hasła',
       invalid_credentials: 'Nieprawidłowy adres e-mail lub hasło',
+      verifying: 'Weryfikacja...',
     },
     changePassword: {
       newPassword: 'Nowe hasło',
@@ -21,5 +30,50 @@ export default {
       email_invalid: 'Wprowadź poprawny adres e-mail',
       password_required: 'Wprowadź hasło',
     },
+    leftDrawer: {
+      MyLearning: 'Moja nauka',
+      Dashboard: 'Pulpit',
+      Courses: 'Kursy',
+      Assignments: 'Zadania',
+      Events: 'Wydarzenia',
+      Community: 'Społeczność',
+      LearningPaths: 'Ścieżki nauki',
+      Discovery: 'Odkrywanie',
+      Me: 'Ja',
+      Profile: 'Profil',
+      Certificates: 'Certyfikaty',
+      Settings: 'Ustawienia',
+      Logout: 'Wyloguj się',
+      GlobalSearch: 'Wyszukiwanie globalne',
+    },
+  },
+  dashboard: {
+    title: 'Pulpit',
+    cancel: 'Anuluj',
+    save: 'Zapisz pulpit',
+    edit: 'Edytuj pulpit',
+  },
+  profile: {
+    myProfile: 'Mój Profil',
+    identityAndPublicProfile: 'Tożsamość i profil publiczny',
+    profilePictureAlt: 'Zdjęcie profilowe',
+    displayName: 'Nazwa wyświetlana',
+    sensoryAndAccessiblePreferences: 'Preferencje sensoryczne i dostępności',
+    reducedMotion: 'Zmniejszony ruch',
+    reducedMotionTooltip:
+      'Wyłącza animacje interfejsu, płynne przewijanie i efekty najechania kursorem dla bardziej statycznego i komfortowego doświadczenia.',
+    dyslexiaFriendlyStyle: 'Styl przyjazny dla dyslektyków',
+    dyslexiaFriendlyStyleTooltip:
+      'Zmienia czcionkę i zwiększa odstępy między literami, aby ułatwić czytanie i zapobiec zlewaniu się słów.',
+    focusMode: 'Tryb skupienia',
+    focusModeTooltip:
+      'Ukrywa dodatkowe elementy pulpitu, funkcje społecznościowe i panele boczne, aby zminimalizować rozproszenie podczas nauki.',
+    hideTimers: 'Ukryj timery',
+    hideTimersTooltip:
+      'Usuwa widoczne odliczania podczas quizów i zadań, aby zmniejszyć stres związany z czasem.',
+    fontSize: 'Rozmiar czcionki',
+    revertToDefault: 'Przywróć wartość domyślną',
+    highContrastMode: 'Tryb Wysokiego Kontrastu',
+    highContrastModeTooltip: 'Zwiększa kontrast kolorów dla lepszej widoczności i czytelności.',
   },
 };

@@ -1,6 +1,7 @@
 {
   "name": "@btg/shared-types",
   "version": "1.0.0",
+  "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -10,14 +11,9 @@
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "dependencies": {
-    "@nestjs/swagger": "^11.2.3",
-    "class-transformer": "^0.5.1",
-    "class-validator": "^0.14.0",
-    "reflect-metadata": "^0.2.2"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "typescript": "^5.0.0"
+    "typescript": "^6.0.3"
   },
   "keywords": [],
   "author": "",

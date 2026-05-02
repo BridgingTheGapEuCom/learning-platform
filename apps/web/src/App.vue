@@ -7,6 +7,7 @@ import { useQuasar } from 'quasar';
 import { useUserStore } from 'stores/user';
 import { onBeforeMount, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { useCssVar } from '@vueuse/core';
 
 const userStore = useUserStore();
 const languageModules = import.meta.glob('../node_modules/quasar/lang/*.js');
@@ -17,9 +18,6 @@ onBeforeMount(async () => {
   const userSettings = localStorage.getItem('user-settings');
   if (userSettings) {
     const parsedSettings = JSON.parse(userSettings);
-    userStore.settings.highContrast = parsedSettings.highContrast
-      ? parsedSettings.highContrast
-      : false;
     userStore.settings.language = parsedSettings.language ? parsedSettings.language : 'en-US';
   }
 
@@ -54,15 +52,40 @@ onBeforeMount(async () => {
   }
 });
 
-userStore.$subscribe((_mutation, state) => {
-  if (state.settings.highContrast) {
-    document.body.classList.add('highContrastMode');
-  } else {
-    document.body.classList.remove('highContrastMode');
-  }
+watch(
+  () => userStore.settings.highContrast,
+  (current) => {
+    if (current) {
+      document.body.classList.add('highContrastMode');
+    } else {
+      document.body.classList.remove('highContrastMode');
+    }
+  },
+  { immediate: true },
+);
 
-  localStorage.setItem('user-settings', JSON.stringify(state.settings));
-});
+watch(
+  () => userStore.settings.reducedMotion,
+  (val) => {
+    if (val === 'reduce') {
+      document.body.classList.add('reduce-motion');
+    } else {
+      document.body.classList.remove('reduce-motion');
+    }
+  },
+  { immediate: true },
+);
+
+watch(
+  () => userStore.settings.fontSize,
+  (val) => {
+    if (val) {
+      const fontSizeVariable = useCssVar('--default-font-size');
+      fontSizeVariable.value = val;
+    }
+  },
+  { immediate: true },
+);
 
 watch(locale, async (newLocale) => {
   if (newLocale !== $q.lang.isoName) {

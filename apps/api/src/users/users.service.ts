@@ -11,7 +11,8 @@ import { CreateUserDto } from './dto/create-user.dto';
 import * as argon2 from 'argon2';
 import * as crypto from 'crypto';
 import { ConfigService } from '@nestjs/config';
-import { CreateSocialUserDto, Role } from '@btg/shared-types';
+import { Role } from '@btg/shared-types';
+import { CreateSocialUserDto } from 'src/auth/dto/create-social-user.dto';
 
 @Injectable()
 export class UsersService implements OnModuleInit {
@@ -28,7 +29,7 @@ export class UsersService implements OnModuleInit {
    *
    * @return {Promise<void>} A promise that resolves when the seeding process is complete.
    */
-  async onModuleInit() {
+  async onModuleInit(): Promise<void> {
     await this.seedInitialAdmin();
   }
 
@@ -64,7 +65,7 @@ export class UsersService implements OnModuleInit {
         password: hashedPassword,
         firstName,
         lastName,
-        global_role: Role.SuperAdmin,
+        globalRole: Role.SuperAdmin,
         mustChangePassword: true,
         organizations: [],
       });
@@ -155,18 +156,43 @@ export class UsersService implements OnModuleInit {
     return newUser.save();
   }
 
+  /**
+   * Retrieves all user records from the database.
+   *
+   * @return {Promise<User[]>} A promise that resolves to an array containing all users.
+   */
   async findAll(): Promise<User[]> {
     return this.userModel.find().exec();
   }
 
+  /**
+   * Finds a single user based on their email address.
+   *
+   * @param {string} email - The email address of the user to retrieve.
+   * @return {Promise<User | null>} A promise that resolves to the user document if found, or null if no user exists with the given email.
+   */
   async findOneByEmail(email: string): Promise<User | null> {
     return this.userModel.findOne({ email }).exec();
   }
 
+  /**
+   * Finds a user by email and explicitly includes the password field in the result.
+   * This is typically used for authentication logic where the password is excluded from default queries.
+   *
+   * @param {string} email - The email address of the user.
+   * @return {Promise<User | null>} A promise that resolves to the user document with the password field included, or null if not found.
+   */
   async findUserWithPassword(email: string): Promise<User | null> {
     return this.userModel.findOne({ email }).select('+password').exec();
   }
 
+  /**
+   * Finds a user by their unique identifier.
+   * Handles both string and ObjectId formats for the ID parameter.
+   *
+   * @param {Types.ObjectId | string} id - The unique ID of the user.
+   * @return {Promise<User | null>} A promise that resolves to the user document if found, or null if the user does not exist.
+   */
   async findOneById(id: Types.ObjectId | string): Promise<User | null> {
     if (typeof id === 'string') {
       id = new Types.ObjectId(id);
@@ -174,6 +200,13 @@ export class UsersService implements OnModuleInit {
     return this.userModel.findById(id).exec();
   }
 
+  /**
+   * Finds a user by their unique identifier and explicitly includes the hashed refresh token.
+   * Handles both string and ObjectId formats for the ID parameter.
+   *
+   * @param {Types.ObjectId | string} id - The unique ID of the user.
+   * @return {Promise<User | null>} A promise that resolves to the user document including the hashedRefreshToken, or null if not found.
+   */
   async findOneByIdWithRefreshToken(
     id: Types.ObjectId | string,
   ): Promise<User | null> {
@@ -183,6 +216,14 @@ export class UsersService implements OnModuleInit {
     return this.userModel.findById(id).select('+hashedRefreshToken').exec();
   }
 
+  /**
+   * Adds an organization to a user's list of organizations.
+   * Uses the $addToSet operator to prevent the addition of duplicate organization IDs.
+   *
+   * @param {Types.ObjectId} userId - The unique ID of the user to update.
+   * @param {Types.ObjectId} orgId - The ID of the organization to add to the user's list.
+   * @return {Promise<User | null>} A promise that resolves to the updated user document, or null if the user was not found.
+   */
   async addOrganization(
     userId: Types.ObjectId,
     orgId: Types.ObjectId,
@@ -196,15 +237,29 @@ export class UsersService implements OnModuleInit {
       .exec();
   }
 
+  /**
+   * Updates an existing user document with partial data.
+   *
+   * @param {Types.ObjectId} userId - The unique ID of the user to update.
+   * @param {Partial<User>} updateData - An object containing the user fields to be updated.
+   * @return {Promise<User | null>} A promise that resolves to the updated user document, or null if the user was not found.
+   */
   async update(
     userId: Types.ObjectId,
     updateData: Partial<User>,
   ): Promise<User | null> {
     return this.userModel
-      .findByIdAndUpdate(userId, updateData, { new: true })
+      .findByIdAndUpdate(userId, updateData, { returnDocument: 'after' })
       .exec();
   }
 
+  /**
+   * Updates the Google authentication details for a specific user.
+   *
+   * @param {string} userId - The string representation of the user's unique ID.
+   * @param {GoogleAuth} googleData - The object containing Google OAuth information to persist.
+   * @return {Promise<User | null>} A promise that resolves to the updated user document.
+   */
   async updateGoogleAuth(userId: string, googleData: GoogleAuth) {
     return this.userModel.findByIdAndUpdate(
       userId,

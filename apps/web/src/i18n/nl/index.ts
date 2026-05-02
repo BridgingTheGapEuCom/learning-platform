@@ -1,5 +1,13 @@
 export default {
   app: {
+    brand: 'Bridging The Gap',
+    platformName: 'Bridging The Gap',
+    learningPlatform: 'Leerplatform',
+    skipToMainContent: 'Ga naar hoofdinhoud',
+    errorNotFound: {
+      nothingHere: 'Oeps. Hier is niets...',
+      goHome: 'Naar de startpagina',
+    },
     login: {
       welcome_title: 'Welkom op het Bridging The Gap leerplatform',
       language_label: 'Taal',
@@ -10,6 +18,7 @@ export default {
       high_contrast_mode: 'Hoog contrast-modus',
       toggle_password_visibility: 'Wachtwoord tonen/verbergen',
       invalid_credentials: 'Ongeldig e-mailadres of wachtwoord',
+      verifying: 'Bezig met verifiëren...',
     },
     changePassword: {
       newPassword: 'Nieuw wachtwoord',
@@ -21,5 +30,51 @@ export default {
       email_invalid: 'Voer een geldig e-mailadres in',
       password_required: 'Voer uw wachtwoord in',
     },
+    leftDrawer: {
+      MyLearning: 'Mijn Leren',
+      Dashboard: 'Dashboard',
+      Courses: 'Cursussen',
+      Assignments: 'Opdrachten',
+      Events: 'Evenementen',
+      Community: 'Community',
+      LearningPaths: 'Leerpaden',
+      Discovery: 'Ontdekking',
+      Me: 'Ik',
+      Profile: 'Profiel',
+      Certificates: 'Certificaten',
+      Settings: 'Instellingen',
+      Logout: 'Uitloggen',
+      GlobalSearch: 'Globaal zoeken',
+    },
+  },
+  dashboard: {
+    title: 'Dashboard',
+    cancel: 'Annuleren',
+    save: 'Dashboard opslaan',
+    edit: 'Dashboard bewerken',
+  },
+  profile: {
+    myProfile: 'Mijn Profiel',
+    identityAndPublicProfile: 'Identiteit en openbaar profiel',
+    profilePictureAlt: 'Profiel foto',
+    displayName: 'Weergavenaam',
+    sensoryAndAccessiblePreferences: 'Zintuiglijke en toegankelijke voorkeuren',
+    reducedMotion: 'Verminderde beweging',
+    reducedMotionTooltip:
+      'Schakelt interface-animaties, soepel scrollen en hover-effecten uit voor een statische, comfortabelere ervaring.',
+    dyslexiaFriendlyStyle: 'Dyslexie-vriendelijke stijl',
+    dyslexiaFriendlyStyleTooltip:
+      'Verandert het lettertype en vergroot de letterafstand om lezen gemakkelijker te maken en te voorkomen dat woorden te dicht op elkaar staan.',
+    focusMode: 'Focusmodus',
+    focusModeTooltip:
+      'Verbergt secundaire dashboard-elementen, community-functies en zijbalken om afleiding te minimaliseren tijdens het leren.',
+    hideTimers: 'Timers verbergen',
+    hideTimersTooltip:
+      'Verwijdert zichtbare afteltimers tijdens quizzen en opdrachten om tijdgerelateerde angst te verminderen.',
+    fontSize: 'Lettergrootte',
+    revertToDefault: 'Terug naar standaardwaarde',
+    highContrastMode: 'Hoge Contrastmodus',
+    highContrastModeTooltip:
+      'Verhoogt het kleurcontrast voor betere zichtbaarheid en leesbaarheid.',
   },
 };

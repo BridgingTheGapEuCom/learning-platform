@@ -1,7 +1,13 @@
 export default {
   app: {
     platformName: 'Bridging The Gap',
+    brand: 'Bridging The Gap',
     learningPlatform: 'Learning Platform',
+    skipToMainContent: 'Skip to main content',
+    errorNotFound: {
+      nothingHere: 'Oops. Nothing here...',
+      goHome: 'Go Home',
+    },
     login: {
       welcome_title: 'Welcome to Bridging The Gap Learning Platform',
       language_label: 'Language',
@@ -12,6 +18,7 @@ export default {
       high_contrast_mode: 'High Contrast Mode',
       toggle_password_visibility: 'Toggle password visibility',
       invalid_credentials: 'Invalid email or password',
+      verifying: 'Verifying...',
     },
     changePassword: {
       newPassword: 'New Password',
@@ -24,7 +31,11 @@ export default {
       password_required: 'Please enter your password',
     },
     leftDrawer: {
+      Admin: 'Global Settings',
+      AdminUserManagement: 'User Management',
       MyLearning: 'My Learning',
+      MyCourses: 'My courses',
+      CoursesList: 'Courses List',
       Dashboard: 'Dashboard',
       Courses: 'Courses',
       Assignments: 'Assignments',
@@ -37,6 +48,52 @@ export default {
       Certificates: 'Certificates',
       Settings: 'Settings',
       Logout: 'Logout',
+      GlobalSearch: 'Global Search',
+    },
+    myCourses: {
+      myCreatedCourses: 'My Created Courses',
+      createNewCourse: 'Create New Course',
+      status: {
+        label: 'Status Filter',
+        all: 'All',
+        published: 'Published',
+        draft: 'Draft',
+        underReview: 'Under Review',
+      },
+    },
+  },
+  dashboard: {
+    title: 'Dashboard',
+    cancel: 'Cancel',
+    save: 'Save Dashboard',
+    edit: 'Edit Dashboard',
+  },
+  profile: {
+    myProfile: 'My Profile',
+    identityAndPublicProfile: 'Identity & public profile',
+    profilePictureAlt: 'Profile picture',
+    displayName: 'Display Name',
+    sensoryAndAccessiblePreferences: 'Sensory & accessible preferences',
+    reducedMotion: 'Reduced Motion',
+    reducedMotionTooltip:
+      'Disables interface animations, smooth scrolling, and hover effects for a static, more comfortable experience.',
+    dyslexiaFriendlyStyle: 'Dyslexia-Friendly Style',
+    dyslexiaFriendlyStyleTooltip:
+      'Changes the font and increases letter spacing to make reading easier and prevent words from crowding.',
+    focusMode: 'Focus Mode',
+    focusModeTooltip:
+      'Hides secondary dashboard elements, community features, and sidebars to minimize distractions while you learn.',
+    hideTimers: 'Hide Timers',
+    hideTimersTooltip:
+      'Removes visible countdown clocks during quizzes and assignments to reduce time-related anxiety.',
+    fontSize: 'Font Size',
+    revertToDefault: 'Revert to default value',
+    highContrastMode: 'High Contrast Mode',
+    highContrastModeTooltip: 'Increases color contrast for better visibility and readability.',
+  },
+  admin: {
+    userManagement: {
+      title: 'User Management',
     },
   },
 };

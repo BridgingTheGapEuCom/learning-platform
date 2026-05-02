@@ -1,6 +1,6 @@
 <template>
   <Base-card
-    class="flex flex-col justify-between"
+    class="h-full flex flex-col justify-between"
     :grid-i="props.gridI"
     v-model:grid-x="gridX"
     v-model:grid-y="gridY"
@@ -11,14 +11,16 @@
     :grid-max-width="12"
     :grid-max-height="1000"
   >
-    <div class="text-bold mb-2 text-xl">Jump Back in</div>
-    <div>
-      <div>Course: <b>Python 101</b></div>
-      <q-linear-progress class="my-1" size="xl" rounded :value="progress" />
-      <div class="text-right">{{ progress * 100 }}% complete</div>
-    </div>
-    <div class="w-full flex justify-center">
-      <BTG_btn label="Resume" class="resume-button"></BTG_btn>
+    <div class="h-full flex flex-col justify-between">
+      <div class="text-bold mb-2 text-xl">Jump Back in</div>
+      <div class="flex-grow flex flex-col justify-center">
+        <div>Course: <b>Python 101</b></div>
+        <q-linear-progress class="my-1" size="xl" rounded :value="progress" />
+        <div class="text-right">{{ progress * 100 }}% complete</div>
+      </div>
+      <div class="w-full flex justify-center">
+        <BTG_btn label="Resume" class="resume-button"></BTG_btn>
+      </div>
     </div>
   </Base-card>
 </template>

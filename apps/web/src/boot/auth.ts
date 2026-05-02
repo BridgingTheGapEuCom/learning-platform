@@ -12,6 +12,7 @@ export default boot(async ({ store }) => {
 
     userStore.setAuth(access_token /*, user */);
   } catch (error) {
+    console.error(error);
     userStore.clearAuth();
   }
 });

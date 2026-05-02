@@ -10,8 +10,12 @@
     :min-h="props.gridMinHeight"
     :max-w="props.gridMaxWidth"
     :max-h="props.gridMaxHeight"
+    :is-resizable="props.resizable && editable"
+    :is-draggable="props.draggable && editable"
     @resize="resizing = true"
     @resized="resizing = false"
+    @move="moving = true"
+    @moved="moving = false"
     @container-resized="resizing = false"
   >
     <q-dialog v-model="confirmDelete" backdrop-filter="blur(4px)">
@@ -48,7 +52,7 @@
       @blur="resizing = false"
     ></div>
     <svg
-      v-if="editable"
+      v-if="editable || hoverable"
       class="absolute top-0 left-0 w-full h-full pointer-events-none z-20 rounded-md"
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -120,13 +124,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, useTemplateRef, onMounted, onUnmounted, inject } from 'vue';
+import { ref, watch, useTemplateRef, onMounted, onUnmounted } from 'vue';
 import { GridItem } from 'grid-layout-plus';
 import { useQuasar } from 'quasar';
 import { computed } from 'vue';
 import BTG_btn from '../BTG_elements/BTG_btn.vue';
 
-const emit = defineEmits(['deleteCard']);
+const emit = defineEmits(['deleteCard', 'triggerLayoutUpdate', 'resizingOrMoving']);
 
 interface Props {
   gridI: number;
@@ -135,9 +139,17 @@ interface Props {
   gridMaxWidth: number;
   gridMaxHeight: number;
   editable?: boolean | undefined;
+  resizable?: boolean | undefined;
+  draggable?: boolean | undefined;
+  backgroundColor?: string | undefined;
+  hoverable?: boolean | undefined;
 }
 
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+  resizable: true,
+  draggable: true,
+  hoverable: false,
+});
 
 const $q = useQuasar();
 
@@ -171,18 +183,15 @@ const widgetMoveMode = ref(false);
 const widgetResizeMode = ref(false);
 
 const resizing = ref(false);
+const moving = ref(false);
 
 const moveWidgetBtn = useTemplateRef<typeof BTG_btn>('moveWidgetBtn');
 const resizeWidgetBtn = useTemplateRef<typeof BTG_btn>('resizeWidgetBtn');
 
 const confirmDelete = ref(false);
 
-const triggerLayoutUpdate = inject<() => void>('triggerLayoutUpdate');
-
 const handlePositionChange = () => {
-  if (triggerLayoutUpdate) {
-    triggerLayoutUpdate();
-  }
+  emit('triggerLayoutUpdate');
 };
 
 const onMoveWidgetClick = () => {
@@ -194,13 +203,6 @@ const onResizeWidgetClick = () => {
   resizeWidgetBtn.value?.focus();
   widgetResizeMode.value = !widgetResizeMode.value;
 };
-
-watch(
-  () => props.editable,
-  () => {
-    widgetMoveMode.value = false;
-  },
-);
 
 const handleArrowKeys = (event: KeyboardEvent) => {
   if (!widgetMoveMode.value && !widgetResizeMode.value) return;
@@ -275,4 +277,18 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('keydown', handleArrowKeys);
 });
+
+watch(
+  () => props.editable,
+  () => {
+    widgetMoveMode.value = false;
+  },
+);
+
+watch(
+  () => resizing.value || moving.value || widgetMoveMode.value || widgetResizeMode.value,
+  (current) => {
+    emit('resizingOrMoving', current);
+  },
+);
 </script>

@@ -87,7 +87,7 @@
           >
             <template v-slot:loading>
               <q-spinner class="on-left text-neutral-400"></q-spinner>
-              <div class="capitalize text-neutral-400">Verifying...</div>
+              <div class="capitalize text-neutral-400">{{ t('app.login.verifying') }}</div>
             </template>
           </BTG_btn>
         </q-form>
@@ -105,7 +105,7 @@
         >
           <template v-slot:loading>
             <q-spinner class="on-left text-neutral-400"></q-spinner>
-            <div class="capitalize text-neutral-400">Verifying...</div>
+            <div class="capitalize text-neutral-400">{{ t('app.login.verifying') }}</div>
           </template>
         </BTG_btn>
       </div>
@@ -189,7 +189,23 @@ const onLanguageChange = (value: string | number | null | undefined) => {
   }
 };
 
-const login = async () => {
+/**
+ * Handles the user login process.
+ *
+ * @returns {Promise<void>} A promise that resolves once the login logic and navigation or error handling are finished.
+ *
+ * @description
+ * This function validates the login form, then:
+ * 1. Sends credentials to the server via a POST request.
+ * 2. If authentication is successful (status 200), it updates the user store with the user's data and token, and redirects to the 'Home' page.
+ * 3. If authentication fails or an error occurs, it sets an error flag and focuses the error alert element.
+ *
+ * @edge-cases
+ * - If the form validation fails, the API call is skipped.
+ * - If the server returns a non-200 status, the login is treated as unsuccessful.
+ * - If the API call throws an error (e.g., network failure), it is caught, logged, and the user is notified.
+ */
+const login = async (): Promise<void> => {
   if (await loginForm.value!.validate()) {
     loading.value = true;
     try {
@@ -200,12 +216,7 @@ const login = async () => {
       if (loginResponse.status === 200) {
         const user: User = loginResponse.data.user;
 
-        userStore.email = email.value as string;
-        userStore.firstName = user.firstName;
-        userStore.lastName = user.lastName;
-        userStore.globalRole = user.global_role;
-        userStore.token = loginResponse.data.access_token;
-        userStore.isLoggedIn = true;
+        userStore.setAuth(loginResponse.data.access_token, user);
 
         await router.push({ name: 'Home' });
       } else {

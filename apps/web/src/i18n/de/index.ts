@@ -1,5 +1,13 @@
 export default {
   app: {
+    brand: 'Bridging The Gap',
+    platformName: 'Bridging The Gap',
+    learningPlatform: 'Lernplattform',
+    skipToMainContent: 'Zum Hauptinhalt springen',
+    errorNotFound: {
+      nothingHere: 'Ups. Hier ist nichts...',
+      goHome: 'Zur Startseite',
+    },
     login: {
       welcome_title: 'Willkommen bei der Bridging The Gap Lernplattform',
       language_label: 'Sprache',
@@ -9,7 +17,8 @@ export default {
       login_with_google: 'Mit Google-Konto anmelden',
       high_contrast_mode: 'Hoher Kontrastmodus',
       toggle_password_visibility: 'Passwort-Sichtbarkeit umschalten',
-      invalid_credentials: 'Ungültige E-Mail oder Passwort',
+      invalid_credentials: 'Ung\u00fcltige E-Mail oder Passwort',
+      verifying: 'Überprüfung...',
     },
     changePassword: {
       newPassword: 'Neues Passwort',
@@ -21,5 +30,50 @@ export default {
       email_invalid: 'Bitte geben Sie eine gültige E-Mail-Adresse ein',
       password_required: 'Bitte geben Sie Ihr Passwort ein',
     },
+    leftDrawer: {
+      MyLearning: 'Mein Lernen',
+      Dashboard: 'Dashboard',
+      Courses: 'Kurse',
+      Assignments: 'Aufgaben',
+      Events: 'Veranstaltungen',
+      Community: 'Community',
+      LearningPaths: 'Lernpfade',
+      Discovery: 'Entdecken',
+      Me: 'Ich',
+      Profile: 'Profil',
+      Certificates: 'Zertifikate',
+      Settings: 'Einstellungen',
+      Logout: 'Abmelden',
+      GlobalSearch: 'Globale Suche',
+    },
+  },
+  dashboard: {
+    title: 'Dashboard',
+    cancel: 'Abbrechen',
+    save: 'Dashboard speichern',
+    edit: 'Dashboard bearbeiten',
+  },
+  profile: {
+    myProfile: 'Mein Profil',
+    identityAndPublicProfile: 'Identität und öffentliches Profil',
+    profilePictureAlt: 'Profilbild',
+    displayName: 'Anzeigename',
+    sensoryAndAccessiblePreferences: 'Sensorische und barrierefreie Einstellungen',
+    reducedMotion: 'Reduzierte Bewegung',
+    reducedMotionTooltip:
+      'Deaktiviert Interface-Animationen, sanftes Scrollen und Hover-Effekte für ein statisches, angenehmeres Erlebnis.',
+    dyslexiaFriendlyStyle: 'Dyslexie-freundlicher Stil',
+    dyslexiaFriendlyStyleTooltip:
+      'Ändert die Schriftart und erhöht den Buchstabenabstand, um das Lesen zu erleichtern und das Zusammenlaufen von Wörtern zu verhindern.',
+    focusMode: 'Fokusmodus',
+    focusModeTooltip:
+      'Blendet sekundäre Dashboard-Elemente, Community-Funktionen und Seitenleisten aus, um Ablenkungen beim Lernen zu minimieren.',
+    hideTimers: 'Timer ausblenden',
+    hideTimersTooltip:
+      'Entfernt sichtbare Countdown-Timer während Quizzen und Aufgaben, um zeitbezogene Angst zu reduzieren.',
+    fontSize: 'Schriftgröße',
+    revertToDefault: 'Zurück zum Standardwert',
+    highContrastMode: 'Hoher Kontrastmodus',
+    highContrastModeTooltip: 'Erhöht den Farbkontrast für bessere Sichtbarkeit und Lesbarkeit.',
   },
 };

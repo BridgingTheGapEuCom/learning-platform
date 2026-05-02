@@ -5,8 +5,10 @@
         <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
 
         <div class="text-sm text-center grow-1">
-          <div><b>Bridging The Gap</b></div>
-          Learning Platform
+          <div>
+            <b>{{ t('app.brand') }}</b>
+          </div>
+          {{ t('app.learningPlatform') }}
         </div>
       </q-toolbar>
     </q-header>
@@ -21,7 +23,7 @@
       persistent
     >
       <BTG_btn
-        label="Skip to main content"
+        :label="t('app.skipToMainContent')"
         href="#main-content"
         class="absolute top-[-100vh] left-[-100vw] z-10 focus:top-6 focus:left-4"
         @click="skipToContent"
@@ -43,6 +45,9 @@
 import { ref } from 'vue';
 import LeftDrawer from '../components/LeftDrawer.vue';
 import BTG_btn from '../components/BTG_elements/BTG_btn.vue';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 const leftDrawerOpen = ref(false);
 

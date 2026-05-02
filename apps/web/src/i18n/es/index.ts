@@ -1,5 +1,19 @@
 export default {
+  dashboard: {
+    title: 'Panel',
+    cancel: 'Cancelar',
+    save: 'Guardar panel',
+    edit: 'Editar panel',
+  },
   app: {
+    brand: 'Bridging The Gap',
+    platformName: 'Bridging The Gap',
+    learningPlatform: 'Plataforma de aprendizaje',
+    skipToMainContent: 'Saltar al contenido principal',
+    errorNotFound: {
+      nothingHere: 'Vaya. No hay nada aquí...',
+      goHome: 'Ir a inicio',
+    },
     login: {
       welcome_title: 'Bienvenido a la plataforma de aprendizaje Bridging The Gap',
       language_label: 'Idioma',
@@ -10,6 +24,7 @@ export default {
       high_contrast_mode: 'Modo de alto contraste',
       toggle_password_visibility: 'Alternar visibilidad de la contraseña',
       invalid_credentials: 'Correo electrónico o contraseña incorrectos',
+      verifying: 'Verificando...',
     },
     changePassword: {
       newPassword: 'Nueva contraseña',
@@ -21,5 +36,45 @@ export default {
       email_invalid: 'Por favor, introduce un correo electrónico válido',
       password_required: 'Por favor, introduce tu contraseña',
     },
+    leftDrawer: {
+      MyLearning: 'Mi aprendizaje',
+      Dashboard: 'Panel',
+      Courses: 'Cursos',
+      Assignments: 'Tareas',
+      Events: 'Eventos',
+      Community: 'Comunidad',
+      LearningPaths: 'Rutas de aprendizaje',
+      Discovery: 'Descubrimiento',
+      Me: 'Mi perfil',
+      Profile: 'Perfil',
+      Certificates: 'Certificados',
+      Settings: 'Configuración',
+      Logout: 'Cerrar sesión',
+      GlobalSearch: 'Búsqueda global',
+    },
+  },
+  profile: {
+    myProfile: 'Mi Perfil',
+    identityAndPublicProfile: 'Identidad y perfil público',
+    profilePictureAlt: 'Foto de perfil',
+    displayName: 'Nombre para mostrar',
+    sensoryAndAccessiblePreferences: 'Preferencias sensoriales y accesibles',
+    reducedMotion: 'Movimiento reducido',
+    reducedMotionTooltip:
+      'Desactiva las animaciones de la interfaz, el desplazamiento suave y los efectos de hover para una experiencia más estática y cómoda.',
+    dyslexiaFriendlyStyle: 'Estilo amigable para disléxicos',
+    dyslexiaFriendlyStyleTooltip:
+      'Cambia la fuente y aumenta el espaciado entre letras para facilitar la lectura y evitar el apiñamiento de palabras.',
+    focusMode: 'Modo de enfoque',
+    focusModeTooltip:
+      'Oculta elementos secundarios del panel, funciones comunitarias y barras laterales para minimizar distracciones mientras aprendes.',
+    hideTimers: 'Ocultar temporizadores',
+    hideTimersTooltip:
+      'Elimina los relojes de cuenta regresiva visibles durante cuestionarios y tareas para reducir la ansiedad relacionada con el tiempo.',
+    fontSize: 'Tamaño de fuente',
+    revertToDefault: 'Volver al valor predeterminado',
+    highContrastMode: 'Modo de Alto Contraste',
+    highContrastModeTooltip:
+      'Aumenta el contraste de color para una mejor visibilidad y legibilidad.',
   },
 };
