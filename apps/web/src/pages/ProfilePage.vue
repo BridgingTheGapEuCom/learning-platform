@@ -1,6 +1,5 @@
 <template>
   <div class="w-full h-full flex">
-    <h1>{{ $t('profile.myProfile') }}</h1>
     <div class="w-full rounded-md bg-dark p-4">
       <div class="text-xl text-primary mb-4 uppercase">
         {{ $t('profile.identityAndPublicProfile') }}

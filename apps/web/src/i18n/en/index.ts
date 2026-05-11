@@ -59,6 +59,7 @@ export default {
         published: 'Published',
         draft: 'Draft',
         underReview: 'Under Review',
+        retired: 'Retired',
       },
     },
   },

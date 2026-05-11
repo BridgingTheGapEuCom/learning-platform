@@ -1,15 +1,21 @@
 <template>
-  <q-card class="bg-dark rounded" flat bordered>
+  <q-card class="bg-dark rounded group border" flat>
     <q-card-section horizontal class="q-pa-md flex items-center">
       <div class="w-38 h-38">
         <q-img
-          :src="course.thumbnail"
+          :src="thumbnail ? thumbnail : `/invalidImage`"
           class="rounded-borders"
           :ratio="1"
           :alt="`Thumbnail for ${title}`"
-        />
+        >
+          <template v-slot:error>
+            <div class="absolute-full flex items-center justify-center">
+              <q-icon class="rounded-borders text-dark" name="sym_o_broken_image" size="6rem" />
+              <div class="absolute text-bold text-2xl text-white">No Image</div>
+            </div>
+          </template>
+        </q-img>
       </div>
-
       <q-card-section class="h-38 q-pl-md q-pa-none flex-1 flex flex-col">
         <div class="flex-1 flex flex-col items-stretch justify-between">
           <div class="flex justify-start items-center">
@@ -28,65 +34,27 @@
           </div>
 
           <div class="text-sm text-gray-300">
-            <div>{{ course.learners }} Active Learners</div>
-
-            <q-badge
-              v-if="course.assignments > 0 && status === 'Published'"
-              color="cyan"
-              text-color="dark"
-              class="mt-1 px-2 py-0.5 font-bold"
-            >
-              {{ course.assignments }} Assignments to Review
-            </q-badge>
-            <div v-else class="mt-1">{{ course.assignments }} Assignments</div>
+            <div>
+              <b>{{ new Intl.NumberFormat(undefined, { style: 'decimal' }).format(learners) }}</b>
+              Active Learners
+            </div>
           </div>
         </div>
       </q-card-section>
     </q-card-section>
 
-    <q-card-actions class="q-pa-md q-pt-none row items-center no-wrap">
-      <q-btn outline color="cyan" label="Edit Course" class="rounded-md" />
-      <q-btn
-        v-if="status === 'Published'"
-        outline
-        color="grey-5"
-        label="Manage Learners"
-        class="rounded-md q-ml-sm"
-      />
-
-      <q-space />
-
-      <q-btn
-        flat
-        round
-        dense
-        color="grey-5"
-        icon="sym_o_more_horiz"
-        aria-label="More course actions"
-      >
-        <q-menu class="bg-[#1e1e2e] text-white border border-[#00e5ff]/20">
-          <q-list style="min-width: 150px">
-            <q-item clickable v-close-popup>
-              <q-item-section>Duplicate Course</q-item-section>
-            </q-item>
-            <q-item clickable v-close-popup>
-              <q-item-section class="text-red-400">Archive Course</q-item-section>
-            </q-item>
-          </q-list>
-        </q-menu>
-      </q-btn>
+    <q-card-actions class="q-px-md q-pt-none q-pb-md row items-center no-wrap">
+      <!-- <q-btn outline color="cyan" label="Edit Course" class="rounded-md" /> -->
+      <BTG_btn label="Edit Course" icon="sym_o_edit" />
     </q-card-actions>
   </q-card>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue';
+import BTG_btn from 'src/components/BTG_elements/BTG_btn.vue';
 
 const props = defineProps({
-  course: {
-    type: Object,
-    required: true,
-  },
   title: {
     type: String,
     required: true,
@@ -95,10 +63,20 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  learners: {
+    type: Number,
+    required: true,
+  },
+  assignments: {
+    type: Number,
+    required: true,
+  },
+  thumbnail: {
+    type: String,
+    required: false,
+  },
 });
 
-// Still using Quasar's internal color system ('positive', 'warning')
-// for the q-badge components, which keeps the logic very clean.
 const statusTheme = computed(() => {
   switch (props.status) {
     case 'Published':

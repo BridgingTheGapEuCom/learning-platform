@@ -1,7 +1,6 @@
 <template>
   <div class="h-full w-full flex flex-grow flex-col">
-    <div class="flex justify-between items-center mb-4">
-      <b class="text-2xl">{{ t('dashboard.title') }}</b>
+    <div class="flex justify-end items-center mb-4 mr-2">
       <div class="flex gap-2">
         <BTG_btn
           v-if="editable"

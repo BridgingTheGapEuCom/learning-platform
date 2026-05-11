@@ -18,8 +18,10 @@ async function bootstrap() {
       whitelist: true,
       forbidNonWhitelisted: true,
       transform: true,
+      disableErrorMessages: false,
     }),
   );
+
   app.use(cookieParser());
 
   // if (process.env.NODE_ENV !== 'production') {
@@ -30,7 +32,7 @@ async function bootstrap() {
   // }
 
   const config = new DocumentBuilder()
-    .setTitle('Learning Platform API')
+    .setTitle('Bridging The Gap Learning Platform API')
     .setDescription('The internal API description')
     .setVersion('1.0')
     .addBearerAuth()

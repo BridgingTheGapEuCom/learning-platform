@@ -1,8 +1,9 @@
 <template>
   <q-layout view="lHr lpr lFr">
-    <q-header class="bg-dark text-white" height-hint="98" v-if="!$q.screen.gt.md">
+    <q-header class="bg-dark text-white" height-hint="98">
       <q-toolbar class="flex">
         <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
+        <div>{{ t(route.name as string) }}</div>
 
         <div class="text-sm text-center grow-1">
           <div>
@@ -46,10 +47,12 @@ import { ref } from 'vue';
 import LeftDrawer from '../components/LeftDrawer.vue';
 import BTG_btn from '../components/BTG_elements/BTG_btn.vue';
 import { useI18n } from 'vue-i18n';
+import { useRoute } from 'vue-router';
 
 const { t } = useI18n();
 
 const leftDrawerOpen = ref(false);
+const route = useRoute();
 
 const toggleLeftDrawer = () => {
   leftDrawerOpen.value = !leftDrawerOpen.value;

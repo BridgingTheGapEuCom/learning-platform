@@ -23,6 +23,8 @@ html {
   --q-secondary: var(--catppuccin-color-lavender-500);
   --q-accent: var(--catppuccin-color-overlay2);
 
+  --q-neutral: var(--color-neutral-500);
+
   --text-color: var(--color-stone-200);
   --q-input-text-color: var(--color-stone-200);
   --border-color: var(--color-stone-200);
@@ -33,19 +35,23 @@ html {
 }
 
 body.highContrastMode {
+  --background-color: black;
+
   --q-primary: var(--color-yellow-400);
   --q-secondary: var(--color-purple-700);
   --q-accent: #bac2de;
+
+  --q-neutral: var(--color-neutral-500);
 
   --border-color: var(--color-stone-100);
 
   --q-dark: #1e1e2e;
   --q-dark-page: black;
-  --background-color: black;
 
-  /* --q-negative: var(--color-rose-500); */
   --q-negative: #ff5d66;
   --q-positive: #a6e3a1;
+
+  --text-color: white;
   --q-input-text-color: white;
 }
 
@@ -69,12 +75,32 @@ body {
   background-color: var(--q-negative);
 }
 
+.bg-dark {
+  background-color: var(--q-dark);
+}
+
+.bg-dark-page {
+  background-color: var(--q-dark-page);
+}
+
 .border-negative {
   border-color: var(--q-negative);
 }
 
 .text-color {
   color: var(--text-color);
+}
+
+.border-neutral {
+  border-color: var(--q-neutral);
+}
+
+.text-dark {
+  color: var(--q-dark);
+}
+
+.text-dark-page {
+  color: var(--q-dark-page);
 }
 
 h1,

@@ -12,6 +12,7 @@ import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { EmailModule } from './email/email.module';
 import { CourseModule } from './course/course.module';
+import { CourseDetailsModule } from './course-details/course-details.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { CourseModule } from './course/course.module';
     OrganizationsModule,
     EmailModule,
     CourseModule,
+    CourseDetailsModule,
   ],
   controllers: [AppController],
   providers: [

@@ -1,6 +1,6 @@
 <template>
   <GridItem
-    class="rounded-md group"
+    class="rounded-md group border border-neutral"
     :i="props.gridI"
     v-model:x="gridX"
     v-model:y="gridY"
@@ -57,10 +57,10 @@
       xmlns="http://www.w3.org/2000/svg"
     >
       <rect
-        x="1"
-        y="1"
-        width="calc(100% - 2px)"
-        height="calc(100% - 2px)"
+        x="2"
+        y="2"
+        width="calc(100% - 4px)"
+        height="calc(100% - 4px)"
         fill="none"
         class="transition-colors duration-200"
         :class="

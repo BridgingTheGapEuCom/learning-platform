@@ -1,5 +1,5 @@
-import { IsEmail, IsString, MinLength } from "class-validator";
-import { ApiProperty } from "@nestjs/swagger";
+import { IsEmail, IsString, MinLength } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
 
 /**
  * Data transfer object (DTO) for user login information.
@@ -12,13 +12,13 @@ import { ApiProperty } from "@nestjs/swagger";
  *   - Must be a string with a minimum length requirement.
  */
 export class LoginDto {
-  @ApiProperty({ example: "admin@test.com", description: "User email" })
+  @ApiProperty({ example: 'admin@test.com', description: 'User email' })
   @IsEmail()
   email!: string;
 
   @ApiProperty({
-    example: "password123",
-    description: "User password",
+    example: 'password123',
+    description: 'User password',
     minLength: 8,
   })
   @IsString()
@@ -31,12 +31,12 @@ export class LoginDto {
  */
 export class ChangePasswordDto {
   @ApiProperty({
-    example: "password123",
-    description: "User password",
+    example: 'password123',
+    description: 'User password',
     minLength: 8,
   })
   @IsString()
-  @MinLength(8, { message: "Password must be at least 8 characters long" })
+  @MinLength(8, { message: 'Password must be at least 8 characters long' })
   newPassword!: string;
 }
 
@@ -49,18 +49,18 @@ export class ChangePasswordDto {
  */
 export class RegisterDto {
   @ApiProperty({
-    example: "admin@test.com",
-    description: "User email",
+    example: 'admin@test.com',
+    description: 'User email',
     required: true,
   })
   @IsEmail()
   email!: string;
 
-  @ApiProperty({ example: "John", description: "First name", required: true })
+  @ApiProperty({ example: 'John', description: 'First name', required: true })
   @IsString()
   firstName!: string;
 
-  @ApiProperty({ example: "Doe", description: "Last name", required: true })
+  @ApiProperty({ example: 'Doe', description: 'Last name', required: true })
   @IsString()
   lastName!: string;
 }

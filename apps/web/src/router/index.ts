@@ -44,7 +44,7 @@ export default defineRouter(function (/* { store, ssrContext } */) {
 
     // 2. Authenticated users trying to access the login page
     if (to.name === 'Login' && userStore.isLoggedIn) {
-      return { name: 'Home' }; // Redirect them to the dashboard/home
+      return { name: 'dashboard.title' }; // Redirect them to the dashboard/home
     }
 
     return true;

@@ -25,7 +25,9 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
-    children: [{ path: '', name: 'Home', component: () => import('pages/IndexPage.vue') }],
+    children: [
+      { path: '', name: 'dashboard.title', component: () => import('pages/IndexPage.vue') },
+    ],
     meta: { requiresAuth: true },
   },
   {
@@ -44,7 +46,7 @@ const routes: RouteRecordRaw[] = [
     path: '/me',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: 'profile', name: 'Profile', component: () => import('pages/ProfilePage.vue') },
+      { path: 'profile', name: 'My Profile', component: () => import('pages/ProfilePage.vue') },
     ],
     meta: { requiresAuth: true },
   },
@@ -54,7 +56,7 @@ const routes: RouteRecordRaw[] = [
     children: [
       {
         path: 'courses-list',
-        name: 'MyCoursesList',
+        name: 'My Created Courses',
         component: () => import('pages/MyCoursesListPage.vue'),
       },
     ],
